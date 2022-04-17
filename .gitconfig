@@ -1,0 +1,11 @@
+[core]
+	autocrlf = input
+[user]
+	name = Xunzhou Ye
+	email = yex33@mcmaster.ca
+[credential]
+	helper = cache
+[credential "https://gitlab.cas.mcmaster.ca"]
+	username = yex33
+[init]
+	defaultBranch = main

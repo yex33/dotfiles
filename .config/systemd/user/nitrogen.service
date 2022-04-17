@@ -1,0 +1,12 @@
+[Unit]
+Description=nitrogen wallpaper engine
+After=xorg.target
+Requires=xorg.target
+
+[Service]
+ExecStart=/usr/bin/nitrogen --restore
+Restart=always
+RestartSec=10
+ 
+[Install]
+WantedBy=xorg.target

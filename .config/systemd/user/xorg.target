@@ -1,0 +1,4 @@
+[Unit]
+Description=Xorg running
+BindsTo=graphical-session.target
+

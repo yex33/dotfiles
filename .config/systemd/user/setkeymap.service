@@ -1,0 +1,10 @@
+[Unit]
+Description=Keymap Settings
+After=xorg.target
+Requires=xorg.target
+
+[Service]
+ExecStart=/home/joe/Documents/scripts/set_keymap.sh
+
+[Install]
+WantedBy=xorg.target

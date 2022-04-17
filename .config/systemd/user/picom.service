@@ -1,0 +1,12 @@
+[Unit]
+Description=picom compositor
+After=xorg.target
+Requires=xorg.target
+
+[Service]
+ExecStart=/usr/bin/picom
+Restart=always
+RestartSec=10
+ 
+[Install]
+WantedBy=xorg.target

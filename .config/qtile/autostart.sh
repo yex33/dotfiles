@@ -10,7 +10,7 @@ picom &
 nitrogen --restore &
 
 # keymap
-/home/joe/Documents/scripts/set_keymap.sh
+/home/joe/Documents/scripts/set_keymap.sh &
 
 # hide cursor
 unclutter &

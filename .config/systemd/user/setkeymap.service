@@ -1,10 +1,13 @@
 [Unit]
 Description=Keymap Settings
-After=xorg.target
-Requires=xorg.target
+# BindsTo=dev-bus-usb-001-030.device
+# After=dev-bus-usb-001-030.device
+# StopWhenUnneeded=yes
 
 [Service]
-ExecStart=/home/joe/Documents/scripts/set_keymap.sh
+Environment="DISPLAY=:0.0"
+Environment="XAUTHORITY=/home/joe/.Xauthority"
+Environment="ID_CLASS=keyboard"
+ExecStart=/home/joe/Documents/scripts/set_keymap.sh -d
+# ExecStop=/usr/bin/setxkbmap -layout us
 
-[Install]
-WantedBy=xorg.target

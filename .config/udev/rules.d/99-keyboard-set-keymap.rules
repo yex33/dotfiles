@@ -1,0 +1,3 @@
+ENV{DEVTYPE}=="usb_device" ACTION=="bind", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="0209", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}="setkeymap.service"
+# ENV{DEVTYPE}=="usb_device" ACTION=="unbind", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="0209", RUN+="su joe -c '/bin/systemctl --user --no-block stop setkeymap.service'"
+

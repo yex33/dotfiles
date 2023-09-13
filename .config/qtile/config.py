@@ -39,8 +39,8 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 shell = "fish"
-browser = "firefox"
-alternative_browser = f"firefox -private-window"
+browser = "google-chrome-stable"
+alternative_browser = f"{browser} -incognito"
 font = "Inconsolata Nerd Font Mono"
 screen_arrangement = [1, 0]
 
@@ -161,8 +161,8 @@ groups = [
     Group("DEV", layout="monadthreecol"),
     Group("WWW", layout="monadthreecol"),
     Group("DOC", layout="monadthreecol"),
-    Group("USR", layout="monadthreecol"),
-    Group("USR", layout="monadthreecol"),
+    Group("USR1", layout="monadthreecol"),
+    Group("USR2", layout="monadthreecol"),
     Group("MUS", layout="monadthreecol"),
     Group("VID", layout="monadthreecol"),
     Group("OTH", layout="monadthreecol"),
@@ -329,11 +329,13 @@ def init_widgets(main=False):
             background=colors[0],
             padding=0,
         ),
+        widget.Prompt(
+            background=colors[0],
+        ),
         widget.Systray(
             background=colors[0],
             padding=5
         ),
-        widget.Prompt(),
         widget.Sep(
             linewidth=0,
             padding=6,
@@ -370,6 +372,7 @@ def init_widgets(main=False):
             fontsize=fontsize,
             foreground=colors[1],
             background=colors[4],
+            tag_sensor="Package id 0",
             threshold=90,
             fmt='Temp: {}',
             padding=5,
@@ -386,7 +389,7 @@ def init_widgets(main=False):
             font=font,
             fontsize=fontsize,
             update_interval=1800,
-            distro="Arch_checkupdates",
+            distro="Arch",
             display_format="Updates: {updates} ",
             foreground=colors[1],
             colour_have_updates=colors[1],

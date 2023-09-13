@@ -67,7 +67,14 @@ This function should only modify configuration layer settings."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; c-c++
+     (c-c++ :variables
+            c-c++-backend 'lsp-clangd
+            c-c++-enable-clang-support t
+            c-c++-enable-clang-format-on-save t
+            c-c++-enable-organize-includes-on-save t
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t
+            c-c++-adopt-subprojects t)
      (python :variables
              python-backend 'lsp
              python-lsp-server 'pyright
@@ -682,7 +689,6 @@ This function is called at the very end of Spacemacs initialization."
    "end\\b\\|\\]\\|EndFunction\\b\\|EndFor\\b\\|EndIf\\b\\|EndWhile\\b\\|EndProcedure\\b")
  '(TeX-command-extra-options "-shell-escape")
  '(TeX-date-format "%-d %B %Y")
- '(TeX-engine 'xetex t)
  '(TeX-view-program-selection
    '(((output-dvi has-no-display-manager) "dvi2tty")
      ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
@@ -726,6 +732,9 @@ This function is called at the very end of Spacemacs initialization."
            adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy
            helm-core popup async))
  '(python-shell-interpreter "python3" t)
+ '(safe-local-variable-values
+   '((helm-make-build-dir . "build/") (javascript-backend . tide)
+     (javascript-backend . tern) (javascript-backend . lsp)))
  '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change)))
  '(yas-also-auto-indent-first-line nil))
 (custom-set-faces

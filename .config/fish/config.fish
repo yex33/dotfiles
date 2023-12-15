@@ -3,7 +3,7 @@
 # Removes the path then sets it. Without the first line, the path gets massive
 # and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $fish_user_paths
+set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/Documents/scripts $fish_user_paths
 
 ### export
 

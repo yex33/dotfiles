@@ -24,14 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from typing import List  # noqa: F401
-
 import os
 import socket
 import subprocess
+from typing import List  # noqa: F401
 
-from libqtile import qtile
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -353,7 +351,7 @@ def init_widgets(main=False):
         widget.Net(
             font=font,
             fontsize=fontsize,
-            interface="br0",
+            interface='wlan0',
             format='Net: {down} ↓↑ {up}',
             foreground=colors[1],
             background=colors[3],
@@ -389,8 +387,9 @@ def init_widgets(main=False):
             font=font,
             fontsize=fontsize,
             update_interval=1800,
-            distro="Arch",
+            distro="Arch_checkupdates",
             display_format="Updates: {updates} ",
+            no_update_string="No updates",
             foreground=colors[1],
             colour_have_updates=colors[1],
             colour_no_updates=colors[1],

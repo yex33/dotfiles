@@ -71,10 +71,12 @@ This function should only modify configuration layer settings."
             c-c++-backend 'lsp-clangd
             c-c++-enable-clang-support t
             c-c++-enable-clang-format-on-save t
-            c-c++-enable-organize-includes-on-save t
             c-c++-enable-google-style t
             c-c++-enable-google-newline t
             c-c++-adopt-subprojects t)
+     (cmake :variables
+            cmake-backend 'lsp
+            cmake-enable-cmake-ide-support t)
      (python :variables
              python-backend 'lsp
              python-lsp-server 'pyright
@@ -652,6 +654,12 @@ before packages are loaded."
   ;; bibtex config
   ;; (setq org-ref-default-bibliography '("~/Documents/ReferenceLibrary.bib"))
 
+  ;; texcount command
+  (defun latex-word-count ()
+    (interactive)
+    (shell-command (concat "/usr/bin/texcount " (prin1-to-string (buffer-file-name)))))
+  (spacemacs/set-leader-keys-for-major-mode 'latex-mode "xw" 'latex-word-count)
+
   ;; asm config
   (setq x86-lookup-pdf "~/Documents/64-ia-32-architectures-instruction-set-references.pdf")
   )
@@ -732,6 +740,8 @@ This function is called at the very end of Spacemacs initialization."
            adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy
            helm-core popup async))
  '(python-shell-interpreter "python3" t)
+ '(safe-local-variable-directories
+   '("/home/joe/Documents/McMaster/MECHTRON 4AX3 Predictive & Intelligent Control (ft. MvM)/"))
  '(safe-local-variable-values
    '((helm-make-build-dir . "build/") (javascript-backend . tide)
      (javascript-backend . tern) (javascript-backend . lsp)))

@@ -11,10 +11,10 @@ set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/Documents/scripts
 set fish_greeting
 
 # vim
-set EDITOR "/usr/bin/vim"
-set SUDO_EDITOR "/usr/bin/vim"
-set SYSTEMD_EDITOR "/usr/bin/vim"
-set VISUAL "/usr/bin/vim"
+set EDITOR /usr/bin/nvim
+set SUDO_EDITOR /usr/bin/vim
+set SYSTEMD_EDITOR /usr/bin/vim
+set VISUAL /usr/bin/nvim
 
 # virsh
 set LIBVIRT_DEFAULT_URI "qemu:///system"
@@ -46,7 +46,7 @@ set -g spark_version 1.0.0
 ### keybindings
 
 # !! and !$
-if [ $fish_key_bindings = "fish_vi_key_bindings" ];
+if [ $fish_key_bindings = fish_vi_key_bindings ]
     bind -Minsert ! __history_previous_command
     bind -Minsert '$' __history_previous_command_arguments
 else
@@ -74,19 +74,19 @@ alias .5="cd ../../../../.."
 alias em="/usr/bin/emacs -nw"
 
 # exa
-alias ls="exa -al --color=always --group-directories-first --icons"  # my preferred listing
-alias la="exa -a --color=always --group-directories-first --icons"   # all files and dirs
-alias ll="exa -l --color=always --group-directories-first --icons"   # long format
-alias lt="exa -aT --color=always --group-directories-first --icons"  # tree listing
+alias ls="exa -al --color=always --group-directories-first --icons" # my preferred listing
+alias la="exa -a --color=always --group-directories-first --icons" # all files and dirs
+alias ll="exa -l --color=always --group-directories-first --icons" # long format
+alias lt="exa -aT --color=always --group-directories-first --icons" # tree listing
 alias l.="exa -a --icons | egrep "^\.""
 
 # pacman and paru
-alias pacsyu="sudo pacman -Syu"                  # update only standard pkgs
-alias pacsyyu="sudo pacman -Syyu"                # Refresh pkglist & update standard pkgs
-alias parsua="paru -Sua --noconfirm"             # update only AUR pkgs (paru)
-alias parsyu="paru -Syu --noconfirm"             # update standard pkgs and AUR pkgs (paru)
-alias unlock="sudo rm /var/lib/pacman/db.lck"    # remove pacman lock
-alias cleanup="sudo pacman -Rns (pacman -Qtdq)"  # remove orphaned packages
+alias pacsyu="sudo pacman -Syu" # update only standard pkgs
+alias pacsyyu="sudo pacman -Syyu" # Refresh pkglist & update standard pkgs
+alias parsua="paru -Sua --noconfirm" # update only AUR pkgs (paru)
+alias parsyu="paru -Syu --noconfirm" # update standard pkgs and AUR pkgs (paru)
+alias unlock="sudo rm /var/lib/pacman/db.lck" # remove pacman lock
+alias cleanup="sudo pacman -Rns (pacman -Qtdq)" # remove orphaned packages
 
 # Colorize grep output (good for log files)
 alias grep="grep --color=auto"
@@ -99,8 +99,8 @@ alias mv="mv -i"
 alias rm="rm -i"
 
 # adding flags
-alias df="df -h"                          # human-readable sizes
-alias free="free -m"                      # show sizes in MB
+alias df="df -h" # human-readable sizes
+alias free="free -m" # show sizes in MB
 
 # ps
 alias psa="ps auxf"

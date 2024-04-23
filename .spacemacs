@@ -85,7 +85,6 @@ This function should only modify configuration layer settings."
              python-format-on-save t
              python-sort-imports-on-save t
              python-fill-column 90)
-     php
      html
      yaml
      asm

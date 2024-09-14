@@ -43,6 +43,9 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t)
+     (ranger :variables
+             ranger-ovrride-dired 'ranger
+             ranger-show-preview t)
      better-defaults
      spell-checking
      syntax-checking
@@ -96,6 +99,7 @@ This function should only modify configuration layer settings."
            ruby-backend 'lsp
            ruby-enable-enh-ruby-mode t)
      ruby-on-rails
+     agda
 
      (latex :variables
             latex-backend 'lsp
@@ -590,7 +594,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -601,7 +605,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   ;; (setq initial-frame-alist '((width . 200) (height . 70)))
   (setq evil-respect-visual-line-mode t)
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -609,7 +613,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -621,10 +625,10 @@ before packages are loaded."
 
   ;; evil config
   (define-key evil-normal-state-map (kbd "RET")
-    (lambda ()
-      (interactive)
-      (call-interactively 'spacemacs/evil-insert-line-below)
-      (evil-next-line)))
+              (lambda ()
+                (interactive)
+                (call-interactively 'spacemacs/evil-insert-line-below)
+                (evil-next-line)))
   (define-key evil-normal-state-map (kbd "<S-return>") 'spacemacs/evil-insert-line-above)
 
   ;; org-mode config
@@ -661,7 +665,14 @@ before packages are loaded."
 
   ;; asm config
   (setq x86-lookup-pdf "~/Documents/64-ia-32-architectures-instruction-set-references.pdf")
-  )
+
+  ;; agda config
+  ;; auto-load agda-mode for .agda and .lagda.md
+  (setq auto-mode-alist
+        (append
+         '(("\\.agda\\'" . agda2-mode)
+           ("\\.lagda.md\\'" . agda2-mode))
+         auto-mode-alist)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -685,71 +696,71 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(LaTeX-begin-regexp
-   "begin\\b\\|\\[\\|Function\\b\\|ForAll\\b\\|If\\b\\|While\\b\\|Procedure\\b")
- '(LaTeX-end-regexp
-   "end\\b\\|\\]\\|EndFunction\\b\\|EndFor\\b\\|EndIf\\b\\|EndWhile\\b\\|EndProcedure\\b")
- '(TeX-command-extra-options "-shell-escape")
- '(TeX-date-format "%-d %B %Y")
- '(TeX-view-program-selection
-   '(((output-dvi has-no-display-manager) "dvi2tty")
-     ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
-     (output-pdf "Zathura") (output-html "xdg-open")))
- '(lsp-enable-file-watchers nil)
- '(package-selected-packages
-   '(shfmt reformatter insert-shebang helm-gtags ggtags flycheck-bashate fish-mode
-           counsel-gtags counsel swiper company-shell xterm-color unfill
-           smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist
-           org-projectile org-category-capture org-present org-pomodoro alert
-           log4e gntp org-mime org-download mwim multi-term magit-gitflow
-           magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion
-           parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode
-           git-timemachine git-messenger git-link git-gutter-fringe+
-           git-gutter-fringe fringe-helper git-gutter+ git-gutter
-           flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck
-           evil-magit magit git-commit with-editor transient eshell-z
-           eshell-prompt-extras esh-help diff-hl company-auctex biblio
-           biblio-core auto-dictionary auctex helm-company helm-c-yasnippet
-           fuzzy company-statistics company-quickhelp pos-tip company
-           auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum
-           which-key volatile-highlights vi-tilde-fringe uuidgen use-package
-           toc-org spaceline powerline restart-emacs request rainbow-delimiters
-           popwin persp-mode pcre2el paradox spinner org-plus-contrib
-           org-bullets open-junk-file neotree move-text macrostep lorem-ipsum
-           linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo
-           highlight-parentheses highlight-numbers parent-mode
-           highlight-indentation helm-themes helm-swoop helm-projectile
-           projectile pkg-info epl helm-mode-manager helm-make helm-flx
-           helm-descbinds helm-ag google-translate golden-ratio flx-ido flx
-           fill-column-indicator fancy-battery eyebrowse expand-region
-           exec-path-from-shell evil-visualstar evil-visual-mark-mode
-           evil-unimpaired f evil-tutor evil-surround
-           evil-search-highlight-persist highlight evil-numbers
-           evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens
-           evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape
-           evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree
-           eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word
-           column-enforce-mode clean-aindent-mode bind-map bind-key
-           auto-highlight-symbol auto-compile packed aggressive-indent
-           adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy
-           helm-core popup async))
- '(python-shell-interpreter "python3" t)
- '(safe-local-variable-directories
-   '("/home/joe/Documents/McMaster/MECHTRON 4AX3 Predictive & Intelligent Control (ft. MvM)/"))
- '(safe-local-variable-values
-   '((helm-make-build-dir . "build/") (javascript-backend . tide)
-     (javascript-backend . tern) (javascript-backend . lsp)))
- '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change)))
- '(yas-also-auto-indent-first-line nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(LaTeX-begin-regexp
+     "begin\\b\\|\\[\\|Function\\b\\|ForAll\\b\\|If\\b\\|While\\b\\|Procedure\\b")
+   '(LaTeX-end-regexp
+     "end\\b\\|\\]\\|EndFunction\\b\\|EndFor\\b\\|EndIf\\b\\|EndWhile\\b\\|EndProcedure\\b")
+   '(TeX-command-extra-options "-shell-escape")
+   '(TeX-date-format "%-d %B %Y")
+   '(TeX-view-program-selection
+     '(((output-dvi has-no-display-manager) "dvi2tty")
+       ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
+       (output-pdf "Zathura") (output-html "xdg-open")))
+   '(lsp-enable-file-watchers nil)
+   '(package-selected-packages
+     '(shfmt reformatter insert-shebang helm-gtags ggtags flycheck-bashate fish-mode
+             counsel-gtags counsel swiper company-shell xterm-color unfill
+             smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist
+             org-projectile org-category-capture org-present org-pomodoro alert
+             log4e gntp org-mime org-download mwim multi-term magit-gitflow
+             magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion
+             parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode
+             git-timemachine git-messenger git-link git-gutter-fringe+
+             git-gutter-fringe fringe-helper git-gutter+ git-gutter
+             flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck
+             evil-magit magit git-commit with-editor transient eshell-z
+             eshell-prompt-extras esh-help diff-hl company-auctex biblio
+             biblio-core auto-dictionary auctex helm-company helm-c-yasnippet
+             fuzzy company-statistics company-quickhelp pos-tip company
+             auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum
+             which-key volatile-highlights vi-tilde-fringe uuidgen use-package
+             toc-org spaceline powerline restart-emacs request rainbow-delimiters
+             popwin persp-mode pcre2el paradox spinner org-plus-contrib
+             org-bullets open-junk-file neotree move-text macrostep lorem-ipsum
+             linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo
+             highlight-parentheses highlight-numbers parent-mode
+             highlight-indentation helm-themes helm-swoop helm-projectile
+             projectile pkg-info epl helm-mode-manager helm-make helm-flx
+             helm-descbinds helm-ag google-translate golden-ratio flx-ido flx
+             fill-column-indicator fancy-battery eyebrowse expand-region
+             exec-path-from-shell evil-visualstar evil-visual-mark-mode
+             evil-unimpaired f evil-tutor evil-surround
+             evil-search-highlight-persist highlight evil-numbers
+             evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens
+             evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape
+             evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree
+             eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word
+             column-enforce-mode clean-aindent-mode bind-map bind-key
+             auto-highlight-symbol auto-compile packed aggressive-indent
+             adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy
+             helm-core popup async))
+   '(python-shell-interpreter "python3" t)
+   '(safe-local-variable-directories
+     '("/home/joe/Documents/McMaster/MECHTRON 4AX3 Predictive & Intelligent Control (ft. MvM)/"))
+   '(safe-local-variable-values
+     '((helm-make-build-dir . "build/") (javascript-backend . tide)
+       (javascript-backend . tern) (javascript-backend . lsp)))
+   '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change)))
+   '(yas-also-auto-indent-first-line nil))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+  )

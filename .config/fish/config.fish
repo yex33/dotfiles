@@ -3,7 +3,7 @@
 # Removes the path then sets it. Without the first line, the path gets massive
 # and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/Documents/scripts $fish_user_paths
+set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/.ghcup/bin $HOME/Documents/scripts $fish_user_paths
 
 ### export
 
@@ -73,12 +73,12 @@ alias .5="cd ../../../../.."
 # emacs
 alias em="/usr/bin/emacs -nw"
 
-# exa
-alias ls="exa -al --color=always --group-directories-first --icons" # my preferred listing
-alias la="exa -a --color=always --group-directories-first --icons" # all files and dirs
-alias ll="exa -l --color=always --group-directories-first --icons" # long format
-alias lt="exa -aT --color=always --group-directories-first --icons" # tree listing
-alias l.="exa -a --icons | egrep "^\.""
+# eza
+alias ls="eza -al --color=always --group-directories-first --icons" # my preferred listing
+alias la="eza -a --color=always --group-directories-first --icons" # all files and dirs
+alias ll="eza -l --color=always --group-directories-first --icons" # long format
+alias lt="eza -aT --color=always --group-directories-first --icons" # tree listing
+alias l.="eza -a --icons | egrep "^\.""
 
 # pacman and paru
 alias pacsyu="sudo pacman -Syu" # update only standard pkgs

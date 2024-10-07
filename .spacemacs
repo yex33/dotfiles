@@ -41,8 +41,7 @@ This function should only modify configuration layer settings."
      helm
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-sort-by-usage t)
+                      auto-completion-enable-help-tooltip t)
      (ranger :variables
              ranger-ovrride-dired 'ranger
              ranger-show-preview t)
@@ -64,18 +63,22 @@ This function should only modify configuration layer settings."
            html-enable-lsp t)
 
      markdown
+     mermaid
      (org :variables
           org-enable-github-support t
-          org-enable-sticky-header t)
+          org-enable-sticky-header t
+          org-enable-modern-support t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      (c-c++ :variables
             c-c++-backend 'lsp-clangd
+            c-c++-lsp-enable-semantic-highlight 'rainbow
             c-c++-enable-clang-support t
             c-c++-enable-clang-format-on-save t
             c-c++-enable-google-style t
             c-c++-enable-google-newline t
+            c-c++-dap-adapters '(dap-lldb dap-cpptools)
             c-c++-adopt-subprojects t)
      (cmake :variables
             cmake-backend 'lsp
@@ -623,6 +626,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  (setq standard-indent 2)
+
   ;; evil config
   (define-key evil-normal-state-map (kbd "RET")
               (lambda ()
@@ -633,6 +638,30 @@ before packages are loaded."
 
   ;; org-mode config
   (add-hook 'org-mode-hook 'visual-line-mode)
+  ;; mermaid config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (mermaid . t)
+     (scheme . t)
+     (shell . t)))
+  (add-to-list
+   'org-src-lang-modes
+   '("mermaid" . "markdown"))
+  (require 'subr-x)
+  (defun org+-babel-after-execute ()
+    "Redisplay inline images after executing source blocks with graphics results."
+    (when-let ((info (org-babel-get-src-block-info t))
+               (params (org-babel-process-params (nth 2 info)))
+               (result-params (cdr (assq :result-params params)))
+               ((member "file" result-params)))
+      (org-display-inline-images)))
+  (add-hook 'org-babel-after-execute-hook #'org+-babel-after-execute)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "bD" 'org-babel-remove-result-one-or-many)
+  ;; allow evaluating mermaid src block without confirmation
+  (defun require-confirmation (lang body)
+    (not (member lang '("mermaid" "sh"))))
+  (setq org-confirm-babel-evaluate 'require-confirmation)
 
   ;; python config
   ;; (add-hook 'lsp-pyright-after-open-hook
@@ -672,7 +701,8 @@ before packages are loaded."
         (append
          '(("\\.agda\\'" . agda2-mode)
            ("\\.lagda.md\\'" . agda2-mode))
-         auto-mode-alist)))
+         auto-mode-alist))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -708,53 +738,24 @@ This function is called at the very end of Spacemacs initialization."
    '(TeX-command-extra-options "-shell-escape")
    '(TeX-date-format "%-d %B %Y")
    '(TeX-view-program-selection
-     '(((output-dvi has-no-display-manager) "dvi2tty")
-       ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
-       (output-pdf "Zathura") (output-html "xdg-open")))
+     '(((output-dvi has-no-display-manager)
+        "dvi2tty")
+       ((output-dvi style-pstricks)
+        "dvips and gv")
+       (output-dvi "xdvi")
+       (output-pdf "Zathura")
+       (output-html "xdg-open")))
    '(lsp-enable-file-watchers nil)
    '(package-selected-packages
-     '(shfmt reformatter insert-shebang helm-gtags ggtags flycheck-bashate fish-mode
-             counsel-gtags counsel swiper company-shell xterm-color unfill
-             smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist
-             org-projectile org-category-capture org-present org-pomodoro alert
-             log4e gntp org-mime org-download mwim multi-term magit-gitflow
-             magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion
-             parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode
-             git-timemachine git-messenger git-link git-gutter-fringe+
-             git-gutter-fringe fringe-helper git-gutter+ git-gutter
-             flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck
-             evil-magit magit git-commit with-editor transient eshell-z
-             eshell-prompt-extras esh-help diff-hl company-auctex biblio
-             biblio-core auto-dictionary auctex helm-company helm-c-yasnippet
-             fuzzy company-statistics company-quickhelp pos-tip company
-             auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum
-             which-key volatile-highlights vi-tilde-fringe uuidgen use-package
-             toc-org spaceline powerline restart-emacs request rainbow-delimiters
-             popwin persp-mode pcre2el paradox spinner org-plus-contrib
-             org-bullets open-junk-file neotree move-text macrostep lorem-ipsum
-             linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo
-             highlight-parentheses highlight-numbers parent-mode
-             highlight-indentation helm-themes helm-swoop helm-projectile
-             projectile pkg-info epl helm-mode-manager helm-make helm-flx
-             helm-descbinds helm-ag google-translate golden-ratio flx-ido flx
-             fill-column-indicator fancy-battery eyebrowse expand-region
-             exec-path-from-shell evil-visualstar evil-visual-mark-mode
-             evil-unimpaired f evil-tutor evil-surround
-             evil-search-highlight-persist highlight evil-numbers
-             evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens
-             evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape
-             evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree
-             eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word
-             column-enforce-mode clean-aindent-mode bind-map bind-key
-             auto-highlight-symbol auto-compile packed aggressive-indent
-             adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy
-             helm-core popup async))
+     '(shfmt reformatter insert-shebang helm-gtags ggtags flycheck-bashate fish-mode counsel-gtags counsel swiper company-shell xterm-color unfill smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl company-auctex biblio biblio-core auto-dictionary auctex helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
    '(python-shell-interpreter "python3" t)
    '(safe-local-variable-directories
      '("/home/joe/Documents/McMaster/MECHTRON 4AX3 Predictive & Intelligent Control (ft. MvM)/"))
    '(safe-local-variable-values
-     '((helm-make-build-dir . "build/") (javascript-backend . tide)
-       (javascript-backend . tern) (javascript-backend . lsp)))
+     '((helm-make-build-dir . "build/")
+       (javascript-backend . tide)
+       (javascript-backend . tern)
+       (javascript-backend . lsp)))
    '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change)))
    '(yas-also-auto-indent-first-line nil))
   (custom-set-faces

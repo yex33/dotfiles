@@ -55,7 +55,7 @@ This function should only modify configuration layer settings."
      lsp
      csv
      dap
-     ;; pdf
+     pdf
      (html :variables
            css-enable-lsp t
            less-enable-lsp t
@@ -691,6 +691,9 @@ before packages are loaded."
     (interactive)
     (shell-command (concat "/usr/bin/texcount " (prin1-to-string (buffer-file-name)))))
   (spacemacs/set-leader-keys-for-major-mode 'latex-mode "xw" 'latex-word-count)
+
+  ;; pdf (layer) config
+  (setq revert-without-query '(".*\.pdf"))
 
   ;; asm config
   (setq x86-lookup-pdf "~/Documents/64-ia-32-architectures-instruction-set-references.pdf")

@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ;; themes-megapack
      helm
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t
@@ -116,8 +117,7 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
-   '(
-     evil-tex
+   '(evil-tex
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -277,11 +277,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, *scratch* buffer will be persistent. Things you write down in
    ;; *scratch* buffer will be saved and restored automatically.
-   dotspacemacs-scratch-buffer-persistent nil
+   dotspacemacs-scratch-buffer-persistent t
 
    ;; If non-nil, `kill-buffer' on *scratch* buffer
    ;; will bury it instead of killing.
-   dotspacemacs-scratch-buffer-unkillable nil
+   dotspacemacs-scratch-buffer-unkillable t
 
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
@@ -290,7 +290,13 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '((modus-operandi-tinted :location
+                                                (recipe :fetcher github
+                                                        :repo "protesilaos/modus-themes"))
+                         (modus-vivendi-tinted :location
+                                               (recipe :fetcher github
+                                                       :repo "protesilaos/modus-themes"))
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -635,6 +641,10 @@ before packages are loaded."
                 (call-interactively 'spacemacs/evil-insert-line-below)
                 (evil-next-line)))
   (define-key evil-normal-state-map (kbd "<S-return>") 'spacemacs/evil-insert-line-above)
+  (setq avy-timeout-seconds 0.2)
+
+  ;; yasnippet config
+  (setq yas-also-auto-indent-first-line nil)
 
   ;; org-mode config
   (add-hook 'org-mode-hook 'visual-line-mode)
@@ -671,6 +681,21 @@ before packages are loaded."
 
   ;; auctex config
   (add-hook 'LaTeX-mode-hook 'evil-tex-mode)
+  (setq TeX-command-extra-options "-shell-escape"
+        TeX-date-format "%-d %B %Y")
+
+  ;; https://emacs.stackexchange.com/questions/19472/how-to-let-auctex-open-pdf-with-pdf-tools
+  ;; Use pdf-tools to open PDF files
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t)
+  ;; Update PDF buffers after successful LaTeX runs
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer)
+
+  (setq LaTeX-begin-regexp
+        "begin\\b\\|\\[\\|Function\\b\\|ForAll\\b\\|If\\b\\|While\\b\\|Procedure\\b"
+        LaTeX-end-regexp
+        "end\\b\\|\\]\\|EndFunction\\b\\|EndFor\\b\\|EndIf\\b\\|EndWhile\\b\\|EndProcedure\\b")
 
   ;; evil-tex config
   ;; (evil-tex-bind-to-env-map '(("d" . "description")
@@ -734,33 +759,15 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(LaTeX-begin-regexp
-     "begin\\b\\|\\[\\|Function\\b\\|ForAll\\b\\|If\\b\\|While\\b\\|Procedure\\b")
-   '(LaTeX-end-regexp
-     "end\\b\\|\\]\\|EndFunction\\b\\|EndFor\\b\\|EndIf\\b\\|EndWhile\\b\\|EndProcedure\\b")
-   '(TeX-command-extra-options "-shell-escape")
    '(TeX-date-format "%-d %B %Y")
-   '(TeX-view-program-selection
-     '(((output-dvi has-no-display-manager)
-        "dvi2tty")
-       ((output-dvi style-pstricks)
-        "dvips and gv")
-       (output-dvi "xdvi")
-       (output-pdf "Zathura")
-       (output-html "xdg-open")))
-   '(lsp-enable-file-watchers nil)
    '(package-selected-packages
-     '(shfmt reformatter insert-shebang helm-gtags ggtags flycheck-bashate fish-mode counsel-gtags counsel swiper company-shell xterm-color unfill smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl company-auctex biblio biblio-core auto-dictionary auctex helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
-   '(python-shell-interpreter "python3" t)
-   '(safe-local-variable-directories
-     '("/home/joe/Documents/McMaster/MECHTRON 4AX3 Predictive & Intelligent Control (ft. MvM)/"))
+     '(afternoon-theme alect-themes ample-theme ample-zen-theme anti-zenburn-theme apropospriate-theme badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme busybee-theme cherry-blossom-theme chocolate-theme clues-theme color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme darktooth-theme django-theme doom-themes dracula-theme ef-themes espresso-theme exotica-theme eziam-themes farmhouse-themes flatland-theme flatui-theme gandalf-theme gotham-theme grandshell-theme gruber-darker-theme gruvbox-theme hc-zenburn-theme hemisu-theme heroku-theme inkpot-theme ir-black-theme jazz-theme jbeans-theme kaolin-themes light-soap-theme lush-theme madhat2r-theme majapahit-themes material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme mustang-theme naquadah-theme noctilux-theme obsidian-theme occidental-theme oldlace-theme organic-green-theme phoenix-dark-mono-theme phoenix-dark-pink-theme planet-theme professional-theme purple-haze-theme railscasts-theme rebecca-theme reverse-theme seti-theme smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tango-2-theme tango-plus-theme tangotango-theme tao-theme toxi-theme twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme white-sand-theme zen-and-art-theme zenburn-theme zonokai-emacs xterm-color unfill smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl company-auctex biblio biblio-core auto-dictionary auctex helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
    '(safe-local-variable-values
      '((helm-make-build-dir . "build/")
        (javascript-backend . tide)
        (javascript-backend . tern)
        (javascript-backend . lsp)))
-   '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change)))
-   '(yas-also-auto-indent-first-line nil))
+   '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

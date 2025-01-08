@@ -86,7 +86,6 @@ This function should only modify configuration layer settings."
             cmake-enable-cmake-ide-support t)
      (python :variables
              python-backend 'lsp
-             python-lsp-server 'pyright
              python-test-runner 'pytest
              python-formatter 'lsp
              python-format-on-save t
@@ -98,15 +97,11 @@ This function should only modify configuration layer settings."
      sql
      (java :variables java-backend 'lsp)
      javascript
-
-     (ruby :variables
-           ruby-backend 'lsp
-           ruby-enable-enh-ruby-mode t)
-     ruby-on-rails
      agda
-
+     octave
      (latex :variables
             latex-backend 'lsp
+            latex-build-engine 'xetex
             latex-enable-auto-fill t
             latex-enable-folding t
             latex-enable-magic t)
@@ -646,6 +641,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   (setq standard-indent 2)
+  (switch-to-buffer "*spacemacs*")
 
   ;; evil config
   (define-key evil-normal-state-map (kbd "RET")
@@ -685,6 +681,9 @@ before packages are loaded."
   (defun require-confirmation (lang body)
     (not (member lang '("mermaid" "sh"))))
   (setq org-confirm-babel-evaluate 'require-confirmation)
+
+  ;; c++ config
+  (setq cmake-ide-header-search-other-file nil)
 
   ;; python config
   ;; (add-hook 'lsp-pyright-after-open-hook

@@ -147,7 +147,7 @@ keys = [
     #     desc="Toggle between split and unsplit sides of stack",),
 
     # Toggle between different layouts as defined below
-    Key([mod], "r", lazy.spawncmd(),
+    Key([mod], "r", lazy.spawncmd(command="fish -c \"%s\""),
         desc="Spawn a command using a prompt widget"),
     Key([mod], "f", lazy.toggle_fullscreen(),
         desc="Toggle fullscreen"),

@@ -1,9 +1,10 @@
 ### adding to the PATH
 
-# Removes the path then sets it. Without the first line, the path gets massive
-# and fish becomes very slow.
-set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/.ghcup/bin $HOME/Documents/scripts $fish_user_paths
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.local/share/gem/ruby/3.3.0/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.ghcup/bin
+fish_add_path $HOME/Documents/scripts
 
 ### export
 

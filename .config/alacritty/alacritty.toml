@@ -37,17 +37,17 @@ text = "CellForeground"
 size = 11.0
 
 [font.bold]
-family = "ComicCodeLigatures Nerd Font Mono"
+family = "ComicCodeLigatures"
 style = "Bold"
 
 [font.bold_italic]
-family = "ComicCodeLigatures Nerd Font Mono"
+family = "ComicCodeLigatures"
 
 [font.italic]
-family = "ComicCodeLigatures Nerd Font Mono"
+family = "ComicCodeLigatures"
 
 [font.normal]
-family = "ComicCodeLigatures Nerd Font Mono"
+family = "ComicCodeLigatures"
 style = "Regular"
 
 [font.offset]

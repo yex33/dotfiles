@@ -12,10 +12,10 @@ fish_add_path $HOME/Documents/scripts
 set fish_greeting
 
 # vim
-set EDITOR /usr/bin/nvim
-set SUDO_EDITOR /usr/bin/vim
-set SYSTEMD_EDITOR /usr/bin/vim
-set VISUAL /usr/bin/nvim
+set -gx EDITOR /usr/bin/nvim
+set -gx SUDO_EDITOR /usr/bin/vim
+set -gx SYSTEMD_EDITOR /usr/bin/vim
+set -gx VISUAL /usr/bin/nvim
 
 # virsh
 set LIBVIRT_DEFAULT_URI "qemu:///system"
@@ -115,7 +115,7 @@ alias playmov="mpv *.mov"
 alias playmp4="mpv *.mp4"
 
 # bare git repo alias for dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
 
 # python
 alias python=python3

@@ -30,6 +30,7 @@ import subprocess
 from typing import List  # noqa: F401
 
 from libqtile import bar, hook, layout, qtile, widget
+from libqtile.backend.wayland import InputConfig
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -551,6 +552,16 @@ reconfigure_screens = True
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
 auto_minimize = True
+
+# When using the Wayland backend, this can be used to configure input devices
+wl_input_rules = {
+    "type:keyboard": InputConfig(
+        kb_layout='us',
+        kb_variant="dvp",
+        kb_repeat_rate=30,
+        kb_repeat_delay=250,
+    )
+}
 
 @hook.subscribe.startup_once
 def start_once():

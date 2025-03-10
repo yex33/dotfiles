@@ -40,7 +40,7 @@ terminal = guess_terminal()
 shell = "fish"
 browser = "google-chrome-stable"
 alternative_browser = f"{browser} -incognito"
-font = "Inconsolata Nerd Font Mono"
+font = "Inconsolata Nerd Font"
 screen_arrangement = [1, 0]
 
 # Pulseaudio sink name

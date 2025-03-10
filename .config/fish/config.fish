@@ -12,21 +12,24 @@ fish_add_path $HOME/Documents/scripts
 set fish_greeting
 
 # vim
-set -gx EDITOR /usr/bin/nvim
-set -gx SUDO_EDITOR /usr/bin/vim
-set -gx SYSTEMD_EDITOR /usr/bin/vim
-set -gx VISUAL /usr/bin/nvim
+set -x EDITOR /usr/bin/nvim
+set -x SUDO_EDITOR /usr/bin/vim
+set -x SYSTEMD_EDITOR /usr/bin/vim
+set -x VISUAL /usr/bin/nvim
 
 # virsh
 set LIBVIRT_DEFAULT_URI "qemu:///system"
 
 ### manpager
 
+# nroff start with color output disabled
+set -x MANROFFOPT -c
+
 # "bat" as manpager
-# set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # "vim" as manpager
-set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+# set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
 
 ### fish default emacs mode or vi mode
 function fish_user_key_bindings

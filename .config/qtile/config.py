@@ -336,7 +336,8 @@ def init_widgets(main=False):
         ),
         widget.Systray(
             background=colors[0],
-            padding=5
+            padding=5,
+            icon_size=fontsize,
         ),
         widget.Sep(
             linewidth=0,

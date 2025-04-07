@@ -64,7 +64,7 @@ This function should only modify configuration layer settings."
            html-enable-lsp t)
 
      markdown
-     ;; mermaid
+     mermaid
      (org :variables
           org-enable-github-support t
           org-enable-sticky-header t
@@ -91,6 +91,11 @@ This function should only modify configuration layer settings."
              python-format-on-save t
              python-sort-imports-on-save t
              python-fill-column 90)
+     (ruby :variables
+           ruby-backend 'lsp
+           rbuy-enable-enh-ruby-mode t
+           ruby-test-runner 'rspec)
+     ruby-on-rails
      html
      yaml
      asm
@@ -305,7 +310,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("ComicCodeLigatures"
-                               :size 15
+                               ;; :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.5)
@@ -771,14 +776,82 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(TeX-date-format "%-d %B %Y")
+   '(TeX-date-format "%-d %B %Y" t)
    '(package-selected-packages
-     '(afternoon-theme alect-themes ample-theme ample-zen-theme anti-zenburn-theme apropospriate-theme badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme busybee-theme cherry-blossom-theme chocolate-theme clues-theme color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme darktooth-theme django-theme doom-themes dracula-theme ef-themes espresso-theme exotica-theme eziam-themes farmhouse-themes flatland-theme flatui-theme gandalf-theme gotham-theme grandshell-theme gruber-darker-theme gruvbox-theme hc-zenburn-theme hemisu-theme heroku-theme inkpot-theme ir-black-theme jazz-theme jbeans-theme kaolin-themes light-soap-theme lush-theme madhat2r-theme majapahit-themes material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme mustang-theme naquadah-theme noctilux-theme obsidian-theme occidental-theme oldlace-theme organic-green-theme phoenix-dark-mono-theme phoenix-dark-pink-theme planet-theme professional-theme purple-haze-theme railscasts-theme rebecca-theme reverse-theme seti-theme smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tango-2-theme tango-plus-theme tangotango-theme tao-theme toxi-theme twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme white-sand-theme zen-and-art-theme zenburn-theme zonokai-emacs xterm-color unfill smeargle shell-pop orgit org-ref pdf-tools key-chord ivy tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim multi-term magit-gitflow magit-popup htmlize helm-gitignore helm-bibtex bibtex-completion parsebib gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help diff-hl company-auctex biblio biblio-core auto-dictionary auctex helm-company helm-c-yasnippet fuzzy company-statistics company-quickhelp pos-tip company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+     '(afternoon-theme alect-themes ample-theme ample-zen-theme anti-zenburn-theme
+                       apropospriate-theme badwolf-theme
+                       birds-of-paradise-plus-theme bubbleberry-theme
+                       busybee-theme cherry-blossom-theme chocolate-theme
+                       clues-theme color-theme-sanityinc-solarized
+                       color-theme-sanityinc-tomorrow cyberpunk-theme
+                       dakrone-theme darkmine-theme darkokai-theme darktooth-theme
+                       django-theme doom-themes dracula-theme ef-themes
+                       espresso-theme exotica-theme eziam-themes farmhouse-themes
+                       flatland-theme flatui-theme gandalf-theme gotham-theme
+                       grandshell-theme gruber-darker-theme gruvbox-theme
+                       hc-zenburn-theme hemisu-theme heroku-theme inkpot-theme
+                       ir-black-theme jazz-theme jbeans-theme kaolin-themes
+                       light-soap-theme lush-theme madhat2r-theme majapahit-themes
+                       material-theme minimal-theme modus-themes moe-theme
+                       molokai-theme monochrome-theme monokai-theme mustang-theme
+                       naquadah-theme noctilux-theme obsidian-theme
+                       occidental-theme oldlace-theme organic-green-theme
+                       phoenix-dark-mono-theme phoenix-dark-pink-theme
+                       planet-theme professional-theme purple-haze-theme
+                       railscasts-theme rebecca-theme reverse-theme seti-theme
+                       smyx-theme soft-charcoal-theme soft-morning-theme
+                       soft-stone-theme solarized-theme soothe-theme autothemer
+                       spacegray-theme subatomic-theme subatomic256-theme
+                       sublime-themes sunny-day-theme tango-2-theme
+                       tango-plus-theme tangotango-theme tao-theme toxi-theme
+                       twilight-anti-bright-theme twilight-bright-theme
+                       twilight-theme ujelly-theme underwater-theme
+                       white-sand-theme zen-and-art-theme zenburn-theme
+                       zonokai-emacs xterm-color unfill smeargle shell-pop orgit
+                       org-ref pdf-tools key-chord ivy tablist org-projectile
+                       org-category-capture org-present org-pomodoro alert log4e
+                       gntp org-mime org-download mwim multi-term magit-gitflow
+                       magit-popup htmlize helm-gitignore helm-bibtex
+                       bibtex-completion parsebib gnuplot gitignore-mode
+                       gitconfig-mode gitattributes-mode git-timemachine
+                       git-messenger git-link git-gutter-fringe+ git-gutter-fringe
+                       fringe-helper git-gutter+ git-gutter flyspell-correct-helm
+                       flyspell-correct flycheck-pos-tip flycheck evil-magit magit
+                       git-commit with-editor transient eshell-z
+                       eshell-prompt-extras esh-help diff-hl company-auctex biblio
+                       biblio-core auto-dictionary auctex helm-company
+                       helm-c-yasnippet fuzzy company-statistics company-quickhelp
+                       pos-tip company auto-yasnippet yasnippet ac-ispell
+                       auto-complete ws-butler winum which-key volatile-highlights
+                       vi-tilde-fringe uuidgen use-package toc-org spaceline
+                       powerline restart-emacs request rainbow-delimiters popwin
+                       persp-mode pcre2el paradox spinner org-plus-contrib
+                       org-bullets open-junk-file neotree move-text macrostep
+                       lorem-ipsum linum-relative link-hint indent-guide hydra lv
+                       hungry-delete hl-todo highlight-parentheses
+                       highlight-numbers parent-mode highlight-indentation
+                       helm-themes helm-swoop helm-projectile projectile pkg-info
+                       epl helm-mode-manager helm-make helm-flx helm-descbinds
+                       helm-ag google-translate golden-ratio flx-ido flx
+                       fill-column-indicator fancy-battery eyebrowse expand-region
+                       exec-path-from-shell evil-visualstar evil-visual-mark-mode
+                       evil-unimpaired f evil-tutor evil-surround
+                       evil-search-highlight-persist highlight evil-numbers
+                       evil-nerd-commenter evil-mc evil-matchit evil-lisp-state
+                       smartparens evil-indent-plus evil-iedit-state iedit
+                       evil-exchange evil-escape evil-ediff evil-args evil-anzu
+                       anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav
+                       dumb-jump dash s diminish define-word column-enforce-mode
+                       clean-aindent-mode bind-map bind-key auto-highlight-symbol
+                       auto-compile packed aggressive-indent adaptive-wrap
+                       ace-window ace-link ace-jump-helm-line helm avy helm-core
+                       popup async))
+   '(safe-local-variable-directories
+     '("/home/joe/Documents/McMaster/CAS_MEng_Ned/MPIR/"
+       "/home/joe/Documents/McMaster/CAS_MEng_Ned/MPIR/examples/"))
    '(safe-local-variable-values
-     '((helm-make-build-dir . "build/")
-       (javascript-backend . tide)
-       (javascript-backend . tern)
-       (javascript-backend . lsp)))
+     '((helm-make-build-dir . "build/") (javascript-backend . tide)
+       (javascript-backend . tern) (javascript-backend . lsp)))
    '(warning-suppress-types '((comp) (emacs) (yasnippet backquote-change))))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.

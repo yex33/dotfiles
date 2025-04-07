@@ -217,7 +217,7 @@ layouts = [
     # layout.Zoomy(),
     layout.TreeTab(
         font=font,
-        fontsize=22,
+        fontsize=24,
         sections=["FIRST", "SECOND", "THIRD", "FOURTH"],
         section_fontsize=26,
         border_width=2,
@@ -228,7 +228,7 @@ layouts = [
         inactive_fg="1c1f24",
         padding_left=0,
         padding_x=10,
-        padding_y=5,
+        padding_y=8,
         section_top=10,
         section_bottom=20,
         level_shift=8,
@@ -252,7 +252,7 @@ colors = [["#282c34", "#282c34"],
 prompt = f"{os.environ['USER']}@{socket.gethostname()}"
 
 def init_widgets(main=False):
-    fontsize = 30 if main else 27
+    fontsize = 34 if main else 30
     icon_size = 80 if main else 60
     widgets = [
         widget.Sep(
@@ -278,7 +278,7 @@ def init_widgets(main=False):
             margin_y=3,
             margin_x=0,
             padding_y=5,
-            padding_x=7 if main else 4,
+            padding_x=7,
             borderwidth=3,
             active=colors[2],
             inactive=colors[7],

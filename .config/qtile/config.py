@@ -217,9 +217,9 @@ layouts = [
     # layout.Zoomy(),
     layout.TreeTab(
         font=font,
-        fontsize=12,
+        fontsize=18,
         sections=["FIRST", "SECOND", "THIRD", "FOURTH"],
-        section_fontsize=12,
+        section_fontsize=18,
         border_width=2,
         bg_color="1c1f24",
         active_bg="c678dd",
@@ -233,7 +233,7 @@ layouts = [
         section_bottom=20,
         level_shift=8,
         vspace=3,
-        panel_width=150
+        panel_width=200
     ),
     # layout.Floating(**layout_theme),
 ]
@@ -252,7 +252,8 @@ colors = [["#282c34", "#282c34"],
 prompt = f"{os.environ['USER']}@{socket.gethostname()}"
 
 def init_widgets(main=False):
-    fontsize = 16 if main else 14
+    fontsize = 30 if main else 23
+    icon_size = 80 if main else 60
     widgets = [
         widget.Sep(
             linewidth=0,
@@ -277,7 +278,7 @@ def init_widgets(main=False):
             margin_y=3,
             margin_x=0,
             padding_y=5,
-            padding_x=3,
+            padding_x=7 if main else 4,
             borderwidth=3,
             active=colors[2],
             inactive=colors[7],
@@ -293,7 +294,7 @@ def init_widgets(main=False):
         ),
         widget.TextBox(
             font=font,
-            fontsize=14,
+            fontsize=fontsize,
             text='|',
             background=colors[0],
             foreground='474747',
@@ -316,7 +317,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='|',
             font=font,
-            fontsize=14,
+            fontsize=fontsize,
             background=colors[0],
             foreground='474747',
             padding=2,
@@ -330,6 +331,8 @@ def init_widgets(main=False):
         ),
         widget.Prompt(
             background=colors[0],
+            font=font,
+            fontsize=fontsize,
         ),
         widget.Systray(
             background=colors[0],
@@ -344,7 +347,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[0],
             foreground=colors[3],
             padding=0,
@@ -361,7 +364,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[3],
             foreground=colors[4],
             padding=0,
@@ -379,7 +382,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[4],
             foreground=colors[5],
             padding=0,
@@ -401,7 +404,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[5],
             foreground=colors[6],
             padding=0,
@@ -418,7 +421,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[6],
             foreground=colors[7],
             padding=0,
@@ -434,7 +437,7 @@ def init_widgets(main=False):
         ),
         # widget.TextBox(
         #     text='',
-        #     fontsize=37,
+        #     fontsize=icon_size,
         #     font=font,
         #     background=colors[7],
         #     foreground=colors[8],
@@ -452,7 +455,7 @@ def init_widgets(main=False):
         widget.TextBox(
             text='',
             font=font,
-            fontsize=37,
+            fontsize=icon_size,
             background=colors[7] if main else colors[0],
             foreground=colors[9],
             padding=0,
@@ -515,8 +518,8 @@ def init_widgets(main=False):
 # ]
 
 screens = [
-    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=25)),
-    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=20)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=50)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=35)),
 ]
 
 # Drag floating layouts.

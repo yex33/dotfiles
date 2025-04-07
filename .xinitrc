@@ -1,3 +1,5 @@
+xrdb -merge ~/.Xresources
+
 # Disable beep
 xset -b
 

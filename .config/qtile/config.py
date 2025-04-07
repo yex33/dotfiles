@@ -217,9 +217,9 @@ layouts = [
     # layout.Zoomy(),
     layout.TreeTab(
         font=font,
-        fontsize=18,
+        fontsize=22,
         sections=["FIRST", "SECOND", "THIRD", "FOURTH"],
-        section_fontsize=18,
+        section_fontsize=26,
         border_width=2,
         bg_color="1c1f24",
         active_bg="c678dd",
@@ -227,7 +227,7 @@ layouts = [
         inactive_bg="a9a1e1",
         inactive_fg="1c1f24",
         padding_left=0,
-        padding_x=0,
+        padding_x=10,
         padding_y=5,
         section_top=10,
         section_bottom=20,
@@ -252,7 +252,7 @@ colors = [["#282c34", "#282c34"],
 prompt = f"{os.environ['USER']}@{socket.gethostname()}"
 
 def init_widgets(main=False):
-    fontsize = 30 if main else 23
+    fontsize = 30 if main else 27
     icon_size = 80 if main else 60
     widgets = [
         widget.Sep(
@@ -519,7 +519,7 @@ def init_widgets(main=False):
 
 screens = [
     Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=50)),
-    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=35)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=40)),
 ]
 
 # Drag floating layouts.

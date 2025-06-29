@@ -41,7 +41,7 @@ shell = "fish"
 browser = "google-chrome-stable"
 alternative_browser = f"{browser} -incognito"
 font = "Inconsolata Nerd Font"
-screen_arrangement = [1, 0]
+screen_arrangement = [0, 1]
 
 # Pulseaudio sink name
 # source: https://bbs.archlinux.org/viewtopic.php?id=234451
@@ -519,8 +519,8 @@ def init_widgets(main=False):
 # ]
 
 screens = [
-    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=50)),
     Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=40)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=50)),
 ]
 
 # Drag floating layouts.
@@ -576,8 +576,8 @@ def start_once():
 @hook.subscribe.startup_complete
 def assign_groups_to_screens():
     screen2group_id = {
-        0: 0,
-        1: 8,
+        screen_arrangement[0]: 8,
+        screen_arrangement[1]: 0,
     }
     for screen, group_id in screen2group_id.items():
         qtile.groups_map[groups[group_id].name].cmd_toscreen(screen)

@@ -83,3 +83,5 @@ ranger() {
 #     sudo mv $UDEV_NVIDIA ~
 #     sudo systemctl restart systemd-udevd.service
 # fi
+
+# source /opt/intel/oneapi/setvars.sh

@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# xrandr script for monitors config
-# /home/joe/.screenlayout/dual0.sh
+# Set keyboard layout in X
+$HOME/Documents/scripts/set_keymap.sh
 
-# Compositor
+# Start compositor for fancy visuals
 picom &
 
-# Wallpaper
-nitrogen --restore &
+# Unclutter to hide the mouse cursor
+unclutter --jitter 10 --start-hidden --fork
 
-# keymap
-/home/joe/Documents/scripts/set_keymap.sh &
+# Nitrogen for wallpaper
+nitrogen --set-zoom-fill "$HOME/Pictures/wallpaper.jpg" &
 
-# hide cursor
-unclutter &
+# flameshot for screenshots
+flameshot &

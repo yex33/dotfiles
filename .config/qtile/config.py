@@ -41,12 +41,24 @@ shell = "fish"
 browser = "google-chrome-stable"
 alternative_browser = f"{browser} -incognito"
 font = "Inconsolata Nerd Font"
-screen_arrangement = [0, 1]
+screen_arrangement = [1, 0]
 
 # Pulseaudio sink name
 # source: https://bbs.archlinux.org/viewtopic.php?id=234451
 sink = "@DEFAULT_SINK@"
 # sink = "alsa_output.pci-0000_00_1f.3.analog-stereo"
+
+# layout aware shuffle up/down functions
+def shuffle_up_aware(qtile):
+    if qtile.current_layout.name == "monadthreecol":
+        qtile.current_layout.shuffle_up()
+    elif qtile.current_layout.name == "treetab":
+        qtile.current_layout.move_up()
+def shuffle_down_aware(qtile):
+    if qtile.current_layout.name == "monadthreecol":
+        qtile.current_layout.shuffle_down()
+    elif qtile.current_layout.name == "treetab":
+        qtile.current_layout.move_down()
 
 keys = [
     # launching
@@ -108,9 +120,9 @@ keys = [
         desc="Move window to the left"),
     Key([mod, "control"], "l", lazy.layout.move_right(),
         desc="Move window to the right"),
-    Key([mod, "control"], "j", lazy.layout.shuffle_down(), # lazy.layout.section_down(),
+    Key([mod, "control"], "j", lazy.function(shuffle_down_aware), # lazy.layout.section_down(),
         desc="Move window down"),
-    Key([mod, "control"], "k", lazy.layout.shuffle_up(), # lazy.layout.section_up(),
+    Key([mod, "control"], "k", lazy.function(shuffle_up_aware), # lazy.layout.section_up(),
         desc="Move window up"),
 
     # XmonadTall controls
@@ -300,14 +312,9 @@ def init_widgets(main=False):
             foreground='474747',
             padding=2,
         ),
-        widget.CurrentLayoutIcon(
-            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            foreground=colors[2],
-            background=colors[0],
-            padding=0,
-            scale=0.7,
-        ),
         widget.CurrentLayout(
+            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+            scale=0.7,
             font=font,
             fontsize=fontsize,
             foreground=colors[2],
@@ -519,8 +526,8 @@ def init_widgets(main=False):
 # ]
 
 screens = [
-    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=40)),
-    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=50)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=True), opacity=1.0, size=40)),
+    Screen(top=bar.Bar(widgets=init_widgets(main=False), opacity=1.0, size=50)),
 ]
 
 # Drag floating layouts.

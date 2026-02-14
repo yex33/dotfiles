@@ -60,7 +60,6 @@ window-padding-balance = true
 # Window padding (x and y)
 window-padding-x = 6
 window-padding-y = 6
-title = "Ghostty"
 
 # --- Font Configuration ---
 font-family = "ComicCodeLigatures"

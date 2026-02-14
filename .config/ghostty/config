@@ -1,0 +1,102 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/joe/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+# --- Appearance & Window ---
+background = #282c34
+foreground = #bbc2cf
+cursor-color = #528bff
+selection-background = #3e4451
+selection-foreground = bbc2cf
+window-decoration = false
+window-padding-balance = true
+
+# Window padding (x and y)
+window-padding-x = 6
+window-padding-y = 6
+title = "Ghostty"
+
+# --- Font Configuration ---
+font-family = "ComicCodeLigatures"
+font-size = 11
+
+# Ghostty handles bold/italic automatically if the font is installed, 
+# but you can specify them if needed:
+font-style = "Regular"
+font-style-bold = "Bold"
+
+# Alacritty y=1 offset roughly translates to line-height
+adjust-cell-height = 10%
+
+# --- Colors (Normal) ---
+palette = 0=#1c1f24
+palette = 1=#ff6c6b
+palette = 2=#98be65
+palette = 3=#da8548
+palette = 4=#51afef
+palette = 5=#c678dd
+palette = 6=#5699af
+palette = 7=#202328
+
+# --- Colors (Bright) ---
+palette = 8=#5b6268
+palette = 9=#da8548
+palette = 10=#4db5bd
+palette = 11=#ecbe7b
+palette = 12=#3071db
+palette = 13=#a9a1e1
+palette = 14=#46d9ff
+palette = 15=#dfdfdf
+
+# --- Behavior ---
+scrollback-limit = 10000
+
+# Bind Ctrl+Shift+Space to open the scrollback in your default editor
+keybind = ctrl+shift+space=write_scrollback_file:open
+

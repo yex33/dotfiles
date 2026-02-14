@@ -33,10 +33,9 @@ from libqtile import bar, hook, layout, qtile, widget
 from libqtile.backend.wayland import InputConfig
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 
 mod = "mod4"
-terminal = guess_terminal()
+terminal = "ghostty"
 shell = "fish"
 browser = "google-chrome-stable"
 alternative_browser = f"{browser} -incognito"

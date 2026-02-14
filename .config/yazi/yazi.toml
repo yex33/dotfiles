@@ -1,0 +1,75 @@
+[opener]
+# Text/Editor
+edit = [
+    { run = '${VISUAL:-$EDITOR} "$@"', block = true, desc = "Editor" }
+]
+pager = [
+    { run = '$PAGER "$@"', block = true, desc = "Pager" }
+]
+
+# Web Browsers (GUI)
+browser = [
+    { run = 'google-chrome-stable "$@"', orphan = true, desc = "Google Chrome" }
+]
+
+# Media
+mpv = [
+    { run = 'mpv -- "$@"', orphan = true, desc = "MPV" },
+    { run = 'mpv --fs -- "$@"', orphan = true, desc = "MPV Fullscreen" }
+]
+vlc = [
+    { run = 'vlc -- "$@"', orphan = true, desc = "VLC" }
+]
+
+# Documents
+pdf = [
+    { run = 'zathura "$@"', block = false, desc = "Zathura" },
+]
+office = [
+    { run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" }
+]
+
+# Images
+image = [
+    { run = 'feh -- "$@"', orphan = true, desc = "feh" }
+]
+wallpaper = [
+    { run = 'feh --bg-fill "$1"', desc = "Set Wallpaper" }
+]
+
+# Archives
+extract = [
+    { run = 'atool --extract --each -- "$@"', block = true, desc = "Extract" }
+]
+
+[open]
+rules = [
+    # Websites
+    { url = "*.{html,htm}", use = [ "browser", "pager" ] },
+
+    # Text / Code (The "Misc" section of your rifle)
+    { mime = "text/*", use = [ "edit", "pager" ] },
+    { url = "*.{xml,json,csv,tex,py,pl,rb,js,sh,php,yaml,yml}", use = [ "edit", "pager" ] },
+
+    # Media
+    { mime = "{audio,video}/*", use = [ "mpv", "vlc" ] },
+
+    # Documents
+    { mime = "application/pdf", use = "pdf" },
+    { url = "*.{pptx,docx,xlsx,odt,ods,odp}", use = "office" },
+    { url = "*.epub", use = "pdf" },
+
+    # Images
+    { mime = "image/*", use = [ "image", "wallpaper" ] },
+
+    # Archives
+    { url = "*.{7z,zip,rar,tar,gz,bz2,xz}", use = "extract" },
+
+    # Fallback
+    { url = "*", use = "open" }
+]
+
+[preview]
+max_width  = 1920
+max_height = 1080
+image_quality = 50  # 50 to 90

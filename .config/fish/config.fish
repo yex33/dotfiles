@@ -58,8 +58,8 @@ else
     bind '$' __history_previous_command_arguments
 end
 
-# ranger-cd
-bind \co "ranger-cd ; commandline -f repaint"
+# yazi
+bind \co "y ; commandline -f repaint"
 
 ### alias
 

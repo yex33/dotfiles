@@ -36,7 +36,7 @@ from libqtile.lazy import lazy
 
 mod = "mod4"
 terminal = "ghostty"
-shell = "fish"
+shell = "nu"
 browser = "google-chrome-stable"
 alternative_browser = f"{browser} -incognito"
 font = "Inconsolata Nerd Font"

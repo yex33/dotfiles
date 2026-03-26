@@ -1,10 +1,10 @@
 [opener]
 # Text/Editor
 edit = [
-    { run = '${VISUAL:-$EDITOR} "$@"', block = true, desc = "Editor" }
+    { run = 'nvim "$@"', block = true, desc = "Editor" }
 ]
 pager = [
-    { run = '$PAGER "$@"', block = true, desc = "Pager" }
+    { run = 'bat "$@"', block = true, desc = "Pager" }
 ]
 
 # Web Browsers (GUI)
@@ -31,7 +31,7 @@ office = [
 
 # Images
 image = [
-    { run = 'feh -- "$@"', orphan = true, desc = "feh" }
+    { run = 'feh -- "$@"', block = false, desc = "feh" }
 ]
 wallpaper = [
     { run = 'feh --bg-fill "$1"', desc = "Set Wallpaper" }

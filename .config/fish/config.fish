@@ -128,5 +128,5 @@ alias pip=pip3
 alias ffprobe="ffprobe -v quiet -print_format json -show_format -show_streams"
 
 # mount
-alias mntwin="sudo mount /dev/nvme0n1p3 /mnt/joe/Windows/"
+alias mntwin="sudo mount /dev/nvme1n1p3 /mnt/joe/Windows/"
 alias umntwin="sudo umount /mnt/joe/Windows/"

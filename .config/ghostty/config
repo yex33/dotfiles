@@ -94,7 +94,7 @@ palette = 14=#46d9ff
 palette = 15=#dfdfdf
 
 # --- Behavior ---
-scrollback-limit = 10000
+scrollback-limit = 104857600
 
 # Bind Ctrl+Shift+Space to open the scrollback in your default editor
 keybind = ctrl+shift+space=write_scrollback_file:open

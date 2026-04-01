@@ -21,6 +21,8 @@ $env.PATH ++= ["~/.local/bin", "~/.ghcup/bin", "~/.cargo/bin", "~/Documents/scri
 # Editor
 $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
+$env.config.buffer_editor = "nvim"
+$env.config.edit_mode = "vi"
 # yazi
 def --env y [...args] {
     let tmp = (mktemp -t "yazi-cwd.XXXXXX")
@@ -41,8 +43,12 @@ $env.config.keybindings ++= [
         event: {send: executehostcommand, cmd: "y"}
     }
 ]
-$env.config.buffer_editor = "nvim"
-$env.config.edit_mode = "vi"
+# carapace
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell ...$spans | from json
+}
+$env.config.completions.external.completer = $carapace_completer
 # bare git repo alias for dotfiles
 alias cfg = /usr/bin/git --git-dir=($env.HOME)/.cfg --work-tree=($env.HOME)
 # alias

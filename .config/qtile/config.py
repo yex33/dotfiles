@@ -406,7 +406,7 @@ def init_widgets(main=False):
         widget.Net(
             font=font,
             fontsize=fontsize,
-            interface="wlan0",
+            interface="wlo1",
             format="Net: {down} ↓↑ {up}",
             foreground=colors[1],
             background=colors[3],

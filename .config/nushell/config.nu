@@ -18,6 +18,9 @@
 #     config nu --doc | nu-highlight | less -R
 # PATH
 $env.PATH ++= ["~/.local/bin", "~/.ghcup/bin", "~/.cargo/bin", "~/Documents/scripts"]
+# Editor
+$env.EDITOR = "nvim"
+$env.VISUAL = "nvim"
 # yazi
 def --env y [...args] {
     let tmp = (mktemp -t "yazi-cwd.XXXXXX")

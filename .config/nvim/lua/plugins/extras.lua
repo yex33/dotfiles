@@ -2,6 +2,9 @@ return {
   -- Coding
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
 
+  -- Editor
+  { import = "lazyvim.plugins.extras.editor.overseer" },
+
   -- Languages
   { import = "lazyvim.plugins.extras.lang.cmake" },
   { import = "lazyvim.plugins.extras.lang.docker" },
@@ -15,4 +18,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.sql" },
   { import = "lazyvim.plugins.extras.lang.toml" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
+
+  -- Test
+  { import = "lazyvim.plugins.extras.test.core" },
 }

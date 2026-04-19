@@ -1,0 +1,20 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  lctl tab
+)
+
+(defalias
+  ;; Tap CapsLock for Esc, hold for Control
+  ;; 200 is the hold timeout in ms
+  cec (tap-hold-press 200 200 esc lctl)
+  
+  ;; Tap Tab for Tab, hold for Meta (Super/Mod)
+  tm (tap-hold-press 200 200 tab met)
+)
+
+(deflayer base
+  @cec @tm
+)

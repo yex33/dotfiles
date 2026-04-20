@@ -99,3 +99,4 @@ scrollback-limit = 104857600
 # Bind Ctrl+Shift+Space to open the scrollback in your default editor
 keybind = ctrl+shift+space=write_scrollback_file:open
 
+theme = noctalia

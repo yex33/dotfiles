@@ -3,7 +3,5 @@ use = "pirafrank/what-size"
 rev = "179ebf6"
 hash = "57056b9728006881d580ccabe8154a9c"
 
-[[flavor.deps]]
-use = "yazi-rs/flavors:catppuccin-macchiato"
-rev = "4c57537"
-hash = "2f60298d6c26b6d388c8091a9389fa8f"
+[flavor]
+deps = []

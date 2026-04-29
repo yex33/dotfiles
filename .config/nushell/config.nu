@@ -23,6 +23,12 @@ $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
 $env.config.buffer_editor = "nvim"
 $env.config.edit_mode = "vi"
+$env.config.table = {
+    mode: rounded
+    index_mode: always
+    show_empty: true
+    trim: {methodology: truncating, wrapping_try_keep_words: true, truncating_suffix: "..."}
+}
 # yazi
 def --env y [...args] {
     let tmp = (mktemp -t "yazi-cwd.XXXXXX")
@@ -56,3 +62,6 @@ alias parsyu = paru -Syu --noconfirm
 alias mntwin = sudo mount /dev/nvme1n1p3 /mnt/joe/Windows/
 alias umntwin = sudo umount /mnt/joe/Windows/
 alias la = ls -a
+def ll [] {
+    ls -al | explore
+}

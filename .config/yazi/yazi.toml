@@ -70,6 +70,15 @@ rules = [
 ]
 
 [preview]
+wrap = "yes"
 max_width  = 1920
 max_height = 1080
 image_quality = 50  # 50 to 90
+
+[mgr]
+sort_by = "natural"
+sort_sensitive = false
+sort_dir_first = true
+sort_translit = true
+linemode = "size"
+show_symlink = true

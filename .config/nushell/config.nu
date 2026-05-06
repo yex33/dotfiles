@@ -46,11 +46,18 @@ $env.config.keybindings ++= [
         modifier: control
         keycode: char_o
         mode: vi_normal
-        event: {send: executehostcommand, cmd: "y"}
+        event: {send: ExecuteHostCommand, cmd: "y"}
+    }
+    {
+        name: paste_bash_multiline
+        modifier: alt
+        keycode: char_v
+        mode: [emacs, vi_normal, vi_insert]
+        event: {send: ExecuteHostCommand, cmd: r#'commandline edit (wl-paste | str replace -ar '\\(?=\r?\n)' '' | $"\(($in))")'#}
     }
 ]
 # carapace
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 let carapace_completer = {|spans|
     carapace $spans.0 nushell ...$spans | from json
 }

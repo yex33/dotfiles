@@ -119,7 +119,7 @@ output "DP-1" {
     }
 }
 
-output "HDMI-A-1" {
+output "DP-2" {
     // Uncomment this line to disable this output.
     // off
 
@@ -317,7 +317,6 @@ layout {
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 spawn-sh-at-startup "qs -c ~/.config/quickshell/noctalia-shell"
-spawn-sh-at-startup "~/.config/niri/nudge_lg.sh"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -351,11 +350,11 @@ animations {
 }
 
 workspace "default" {
-    open-on-output "HDMI-A-1"
+    open-on-output "DP-2"
 }
 
 workspace "blender" {
-    open-on-output "HDMI-A-1"
+    open-on-output "DP-2"
 }
 
 // Window rules let you adjust behavior for individual windows.

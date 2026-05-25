@@ -1,0 +1,22 @@
+[Unit]
+Description=Sunshine Game Stream Server
+Requires=sway-headless.service
+After=sway-headless.service
+
+[Service]
+Type=simple
+
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment=WAYLAND_DISPLAY=wayland-2
+
+ExecStartPre=/bin/sleep 3
+ExecStart=/usr/bin/sunshine /home/joe/.config/sunshine/sunshine.conf
+
+Restart=always
+RestartSec=2
+
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Install]
+WantedBy=default.target

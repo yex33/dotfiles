@@ -1,0 +1,14 @@
+[Unit]
+Description=Headless Sway Compositor for Streaming
+After=pipewire.service
+
+[Service]
+Type=simple
+
+Environment=WLR_BACKENDS=headless,libinput
+Environment=WLR_LIBINPUT_NO_DEVICES=1
+
+ExecStart=/usr/bin/sway -c /home/joe/.config/sway/headless-config
+
+[Install]
+WantedBy=default.target

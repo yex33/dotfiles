@@ -109,8 +109,6 @@ output "DP-1" {
     // automatically.
     position x=0 y=0
 
-    focus-at-startup
-
     layout {
         preset-column-widths {
             proportion 1.0
@@ -148,6 +146,8 @@ output "DP-2" {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=1309 y=0
+
+    focus-at-startup
 }
 
 // Settings that influence how windows are positioned and sized.

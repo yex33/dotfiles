@@ -1,0 +1,34 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"     # Show relative line numbers
+mouse = true                 # Enable mouse support
+scrolloff = 8                # Lines to keep above/below the cursor
+bufferline = "multiple"      # Show open buffers at top ("always", "multiple", or "never")
+color-modes = true           # Color status bar based on current mode (Normal, Insert, Select)
+rulers = [120]
+
+[editor.file-picker]
+hidden = false               # Show hidden files in file search (Space + f)
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"                  # Show visible indicators for tabs
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "position", "file-encoding", "file-type"]
+
+[keys.normal]
+ret = ["open_below", "normal_mode"]
+S-ret = ["move_line_up", "open_below", "normal_mode"]
+C-g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+[keys.insert]

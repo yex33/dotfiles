@@ -63,7 +63,7 @@ let carapace_completer = {|spans|
 }
 $env.config.completions.external.completer = $carapace_completer
 # bare git repo alias for dotfiles
-alias cfg = /usr/bin/git --git-dir=($env.HOME)/.cfg --work-tree=($env.HOME)
+alias cfg = /usr/bin/lazygit --git-dir=($env.HOME)/.cfg --work-tree=($env.HOME)
 # alias
 alias parsyu = paru -Syu --noconfirm
 alias mntwin = sudo mount -t ntfs3 -o uid=1000,gid=1000,dmask=0022,fmask=0133 UUID=84D8A0D4D8A0C5B0 /mnt/joe/Windows/
@@ -72,3 +72,4 @@ alias la = ls -a
 def ll [] {
     ls -al | explore
 }
+alias hx = helix

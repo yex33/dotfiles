@@ -8,6 +8,14 @@ return {
       nufmt = {
         command = "nufmt",
       },
+      sqlfluff = {
+        args = {
+          "format",
+          "--stdin-filename",
+          "$FILENAME",
+          "-",
+        },
+      },
     },
   },
 }

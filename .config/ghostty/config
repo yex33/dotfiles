@@ -94,6 +94,8 @@ palette = 14=#46d9ff
 palette = 15=#dfdfdf
 
 # --- Behavior ---
+command = nu
+
 scrollback-limit = 104857600
 
 # Bind Ctrl+Shift+Space to open the scrollback in your default editor

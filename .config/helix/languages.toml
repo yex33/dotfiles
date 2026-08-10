@@ -1,13 +1,43 @@
-[[language]]
-name = "rust"
-auto-format = true
-
 [language-server.rust-analyzer.config.check]
 command = "clippy"
-
 [language-server.rust-analyzer.config.cargo]
 features = "all"
 
+[language-server.crates-lsp]
+command = "crates-lsp"
+except-features = ["format"] # Let taplo handle formatting
+
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+[language-server.harper-ls.config.harper-ls]
+diagnosticSeverity = "information"
+[language-server.harper-ls.config.harper-ls.linters]
+SpellCheck = false
+
+[language-server.postgres-lsp]
+command = "postgres-language-server"
+args = ["lsp-proxy"]
+
+[language-server.codebook]
+command = "codebook-lsp"
+args = ["serve"]
+
+[[language]]
+name = "rust"
+auto-format = true
+language-servers = ["rust-analyzer", "harper-ls", "codebook"]
+
 [[language]]
 name = "sql"
-auto-format = true
+language-servers = ["postgres-lsp", "codebook"]
+
+[[language]]
+name = "toml"
+# https://github.com/tamasfe/taplo/issues/580#issuecomment-2004174721
+roots = ["."]
+language-servers = ["taplo", "crates-lsp", "codebook"]

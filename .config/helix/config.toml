@@ -3,7 +3,7 @@ theme = "catppuccin_mocha"
 [editor]
 line-number = "relative"     # Show relative line numbers
 mouse = true                 # Enable mouse support
-scrolloff = 8                # Lines to keep above/below the cursor
+scrolloff = 15               # Lines to keep above/below the cursor
 bufferline = "multiple"      # Show open buffers at top ("always", "multiple", or "never")
 color-modes = true           # Color status bar based on current mode (Normal, Insert, Select)
 rulers = [120]
@@ -20,6 +20,13 @@ left = ["mode", "spinner", "file-name", "file-modification-indicator"]
 center = []
 right = ["diagnostics", "selections", "position", "file-encoding", "file-type"]
 
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.inline-diagnostics]
+cursor-line = "info"   # Show under cursor: "error", "warning", "info", or "hint"
+
 [keys.normal]
 ret = ["open_below", "normal_mode"]
 S-ret = ["move_line_up", "open_below", "normal_mode"]
@@ -31,4 +38,3 @@ C-g = [
     ":redraw",
     ":reload-all"
 ]
-[keys.insert]

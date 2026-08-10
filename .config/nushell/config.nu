@@ -19,9 +19,9 @@
 # PATH
 $env.PATH ++= ["~/.local/bin", "~/.ghcup/bin", "~/.cargo/bin", "~/Documents/scripts"]
 # Editor
-$env.EDITOR = "nvim"
-$env.VISUAL = "nvim"
-$env.config.buffer_editor = "nvim"
+$env.EDITOR = "helix"
+$env.VISUAL = "helix"
+$env.config.buffer_editor = "helix"
 $env.config.edit_mode = "vi"
 $env.config.table = {
     mode: rounded

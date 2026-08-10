@@ -1,7 +1,7 @@
 [opener]
 # Text/Editor
 edit = [
-    { run = 'nvim "$@"', block = true, desc = "Editor" }
+    { run = 'helix "$@"', block = true, desc = "Editor" }
 ]
 pager = [
     { run = 'bat "$@"', block = true, desc = "Pager" }

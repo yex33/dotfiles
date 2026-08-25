@@ -48,15 +48,15 @@ default_border pixel 4
 default_floating_border pixel 4
 hide_edge_borders none
 
-# Note: Sway does not natively support rounded window geometry corners or 
+# Note: Sway does not natively support rounded window geometry corners or
 # compositor-level box shadows out of the box without downstream patching (e.g., sway-fx).
 
 # --- Core Environments & Shell Initialization ---
-exec qs -c ~/.config/quickshell/noctalia-shell
+exec noctalia
 exec ghostty
 
 # Screen capture path configuration
-# Note: Sway uses external utilities (grim/slurp) for capturing; this variable configures the fallback layout string 
+# Note: Sway uses external utilities (grim/slurp) for capturing; this variable configures the fallback layout string
 set $screenshot_path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 # Allow Noctalia panel mechanics to stay un-tiled
@@ -69,8 +69,8 @@ for_window [app_id="quickshell"] floating enable, border none, sticky enable
 # System commands
 bindsym $mod+Shift+slash exec swaymsg -t get_inputs
 bindsym $mod+Return exec ghostty -e nu
-bindsym $mod+d exec qs -c noctalia-shell ipc call launcher toggle
-bindsym Super+Alt+l exec qs -c noctalia-shell ipc call lockScreen lock
+bindsym $mod+d exec noctalia msg panel-toggle launcher
+bindsym Super+Alt+l exec noctalia msg session lock
 bindsym $mod+b exec brave
 bindsym Super+Alt+s exec pkill orca || exec orca
 
@@ -168,7 +168,7 @@ bindsym $mod+BracketRight splitv
 bindsym $mod+f fullscreen toggle
 bindsym $mod+w layout tabbed
 
-# Continuous sizing mechanics 
+# Continuous sizing mechanics
 bindsym $mod+Minus resize shrink width 10 px or 10 ppt
 bindsym $mod+Equal resize grow width 10 px or 10 ppt
 bindsym $mod+Shift+Minus resize shrink height 10 px or 10 ppt

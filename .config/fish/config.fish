@@ -12,10 +12,10 @@ fish_add_path $HOME/Documents/scripts
 set fish_greeting
 
 # vim
-set -x EDITOR /usr/bin/nvim
+set -x EDITOR /usr/bin/helix
 set -x SUDO_EDITOR /usr/bin/vim
 set -x SYSTEMD_EDITOR /usr/bin/vim
-set -x VISUAL /usr/bin/nvim
+set -x VISUAL /usr/bin/helix
 
 # virsh
 set LIBVIRT_DEFAULT_URI "qemu:///system"
@@ -118,7 +118,7 @@ alias playmov="mpv *.mov"
 alias playmp4="mpv *.mp4"
 
 # bare git repo alias for dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/.cfg --work-tree=$HOME"
+alias cfg="/usr/bin/lazygit--git-dir=$HOME/.cfg --work-tree=$HOME"
 
 # python
 alias python=python3
@@ -130,3 +130,6 @@ alias ffprobe="ffprobe -v quiet -print_format json -show_format -show_streams"
 # mount
 alias mntwin="sudo mount /dev/nvme1n1p3 /mnt/joe/Windows/"
 alias umntwin="sudo umount /mnt/joe/Windows/"
+
+# helix
+alias hx=helix
